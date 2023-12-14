@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+{% block content %}
+    <form action="/authentication" method="post">
+        <input type="hidden" name="next" value="{{ next }}">
+            {{ form.csrf_token() }}
+            <div class="form-group mb-3">
+               {{ form.email.label(class="form-label") }}
+               {{ form.email(class="form-control") }}
+            </div>
+            <div class="form-group mb-3">
+               {{ form.password.label(class="form-label") }}
+               {{ form.password(class="form-control") }}
+            </div>
+            {{ form.login(class="btn btn-primary") }}
+    </form>
+{% endblock %}

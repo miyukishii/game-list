@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jogoteca</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename="bootstrap.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="app.css") }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+<body class="position-relative bg-primary-subtle d-flex justify-content-center align-items-center vh-100">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul id="messages" class="list-unstyled fixed-top" style="width: fit-content;">
+            {% for message in messages %}
+                <li class="alert alert-success">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}       
+    {% endwith %}
+    {% if(logout is not defined) %}
+        <a href="/logout" class="position-absolute top-0 end-0 m-3">
+            <span class="material-icons">
+                logout
+            </span>
+        </a>
+    {% endif %}
+    <div class="container bg-dark-subtle p-3">
+        <div class="navbar">
+            <h1>{{ title }}</h1>
+            {% if(button) %}
+                <a href="{{ button.link }}" class="btn btn-secondary">{{ button.title }}</a>
+            {% endif %}
+        </div>
+      {% block content %} {% endblock %}
+      <!-- Manipula eventos no lado do cliente.
+      Faz requisições AJAX para o servidor Flask. -->
+      <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+    </div>
+</body>
+</html>
